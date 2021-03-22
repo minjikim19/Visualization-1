@@ -20,7 +20,7 @@ const svg = d3.select('svg')
     .attr('height', height);
 
 d3.csv("data/dataset.csv").then(function(data) {
-    console.log(data);
+    //console.log(data);
     const hierarchy = buildHierarchy(data);
     const treemap = d3.treemap()
         .size([width, height])
@@ -33,15 +33,15 @@ d3.csv("data/dataset.csv").then(function(data) {
         .enter().append('g')
         .attr('transform', d => `translate(${d.x0}, ${d.y0})`);
     const tooltipHTML = document.getElementById('tooltip');
-    node.append('path')
+    node.append('rect')
         .attr('width', d => d.x1 - d.x0)
         .attr('height', d => d.y1 - d.y0)
         .attr('fill', function(d) {
-            console.log(d);
+            //console.log(d);
             return color[d.data.Genre];
         })
         .on("mouseover", (d, i) => {
-            console.log("here");
+            //console.log("here");
             const[x, y] = [d.screenX, d.screenY];
             tooltipHTML.classList.add('show');
             tooltipHTML.style.transform = "translate(" + x + "px," + y + "px)";
@@ -100,6 +100,6 @@ function buildHierarchy(csv) {
             }
         }
     }
-    console.log(root);
+    //console.log(root);
     return root;
 }
